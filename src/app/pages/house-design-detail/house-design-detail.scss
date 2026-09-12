@@ -1,0 +1,130 @@
+.design-detail__layout {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: var(--space-12);
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.design-detail__hero-image {
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, #DCE9E1, #C4D9CD);
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+}
+
+.design-detail__thumbs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-3);
+  margin-top: var(--space-3);
+}
+
+.design-detail__thumb {
+  aspect-ratio: 1;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(135deg, #E9E3D8, #D8CDB8);
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+}
+
+.design-detail__info h1 {
+  margin-block: var(--space-2) var(--space-3);
+}
+
+.spec-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+  margin: var(--space-6) 0;
+
+  div {
+    padding: var(--space-3);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+  }
+
+  dt {
+    font-size: var(--font-size-caption);
+    color: var(--color-text-secondary);
+  }
+
+  dd {
+    margin: 0;
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-body-l);
+  }
+}
+
+.design-detail__cost-box {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-6);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-base);
+
+  strong {
+    font-size: var(--font-size-h1);
+    color: var(--color-brand-primary);
+  }
+
+  .btn { margin-top: var(--space-3); }
+}
+
+.design-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+
+  @media (max-width: 900px) { grid-template-columns: 1fr; }
+}
+
+.design-card {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--color-bg-surface);
+}
+
+.design-card__image {
+  aspect-ratio: 4 / 3;
+  background: linear-gradient(135deg, #DCE9E1, #C4D9CD);
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+}
+
+.design-card__body {
+  padding: var(--space-4);
+}
+
+.final-cta__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-12);
+  align-items: center;
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+  }
+}

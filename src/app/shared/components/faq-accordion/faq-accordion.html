@@ -1,0 +1,54 @@
+<section class="faq-block" aria-label="Frequently Asked Questions">
+  <h2>{{ heading() }}</h2>
+
+  <div class="faq-block__list">
+    @for (faq of faqs(); track faq.question; let i = $index) {
+      <article class="faq-item" [class.is-open]="isOpen(i)">
+        <button
+          type="button"
+          class="faq-item__question"
+          [attr.aria-expanded]="isOpen(i)"
+          (click)="toggle(i)"
+        >
+          <span>{{ faq.question }}</span>
+          <span class="faq-item__icon" aria-hidden="true">{{ isOpen(i) ? '−' : '+' }}</span>
+        </button>
+
+        @if (isOpen(i)) {
+          <div class="faq-item__answer">
+            <!-- GEO-friendly Q&A block: Answer / Data / Example / Summary -->
+            <p class="faq-item__answer-text">{{ faq.answer }}</p>
+
+            @if (faq.dataTable) {
+              <table class="faq-item__table">
+                <thead>
+                  <tr>
+                    @for (h of faq.dataTable.headers; track h) {
+                      <th>{{ h }}</th>
+                    }
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (row of faq.dataTable.rows; track row) {
+                    <tr>
+                      @for (cell of row; track cell) {
+                        <td>{{ cell }}</td>
+                      }
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            }
+
+            @if (faq.example) {
+              <p class="faq-item__example"><strong>Example:</strong> {{ faq.example }}</p>
+            }
+
+            <p class="faq-item__summary"><strong>Summary:</strong> {{ faq.summary }}</p>
+          </div>
+        }
+      </article>
+    }
+  </div>
+</section>
+

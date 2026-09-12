@@ -1,0 +1,41 @@
+<section class="lead-form">
+  @if (!submitted()) {
+    <h3>{{ title() }}</h3>
+    <p class="text-secondary">{{ subtitle() }}</p>
+
+    <form [formGroup]="form" (ngSubmit)="submit()" class="lead-form__form">
+      <div class="lead-form__field">
+        <label for="lf-name">Full Name</label>
+        <input id="lf-name" type="text" formControlName="name" placeholder="Your name" />
+        @if (form.controls.name.invalid && form.controls.name.touched) {
+          <span class="lead-form__error">Please enter your name.</span>
+        }
+      </div>
+
+      <div class="lead-form__field">
+        <label for="lf-phone">Phone Number</label>
+        <input id="lf-phone" type="tel" formControlName="phone" placeholder="10-digit mobile number" />
+        @if (form.controls.phone.invalid && form.controls.phone.touched) {
+          <span class="lead-form__error">Please enter a valid 10-digit mobile number.</span>
+        }
+      </div>
+
+      <div class="lead-form__field">
+        <label for="lf-city">City (optional)</label>
+        <input id="lf-city" type="text" formControlName="city" placeholder="e.g. Delhi, Gurgaon" />
+      </div>
+
+      <button type="submit" class="btn btn-accent lead-form__submit" [disabled]="submitting()">
+        {{ submitting() ? 'Submitting…' : ctaLabel() }}
+      </button>
+
+      <p class="lead-form__disclaimer">No spam. We'll only contact you about your construction estimate.</p>
+    </form>
+  } @else {
+    <div class="lead-form__success">
+      <h3>Thank you! ✅</h3>
+      <p class="text-secondary">Our construction expert will call/WhatsApp you shortly with your personalized estimate.</p>
+    </div>
+  }
+</section>
+

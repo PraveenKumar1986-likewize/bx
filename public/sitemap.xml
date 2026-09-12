@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://www.buildx.in/</loc><priority>1.0</priority></url>
+
+  <!-- Core Service Pages -->
+  <url><loc>https://www.buildx.in/home-construction</loc><priority>0.9</priority></url>
+  <url><loc>https://www.buildx.in/house-construction</loc><priority>0.9</priority></url>
+  <url><loc>https://www.buildx.in/turnkey-construction</loc><priority>0.9</priority></url>
+  <url><loc>https://www.buildx.in/villa-construction</loc><priority>0.9</priority></url>
+  <url><loc>https://www.buildx.in/residential-construction</loc><priority>0.9</priority></url>
+  <url><loc>https://www.buildx.in/home-design-services</loc><priority>0.9</priority></url>
+
+  <!-- Location Pages -->
+  <url><loc>https://www.buildx.in/home-construction-noida</loc><priority>0.9</priority></url>
+  <url><loc>https://www.buildx.in/home-construction-greater-noida</loc><priority>0.9</priority></url>
+  <url><loc>https://www.buildx.in/home-construction-noida-extension</loc><priority>0.8</priority></url>
+  <url><loc>https://www.buildx.in/home-construction-ghaziabad</loc><priority>0.8</priority></url>
+  <url><loc>https://www.buildx.in/home-construction-gurgaon</loc><priority>0.9</priority></url>
+  <url><loc>https://www.buildx.in/home-construction-delhi</loc><priority>0.9</priority></url>
+
+  <!-- Cost Calculator & City Cost Pages -->
+  <url><loc>https://www.buildx.in/cost-calculator</loc><priority>0.9</priority></url>
+  <url><loc>https://www.buildx.in/cost-calculator/villa</loc><priority>0.7</priority></url>
+  <url><loc>https://www.buildx.in/construction-cost-in/delhi</loc><priority>0.8</priority></url>
+  <url><loc>https://www.buildx.in/construction-cost-in/gurgaon</loc><priority>0.8</priority></url>
+  <url><loc>https://www.buildx.in/construction-cost-in/noida</loc><priority>0.8</priority></url>
+  <url><loc>https://www.buildx.in/construction-cost-in/greater-noida</loc><priority>0.8</priority></url>
+  <url><loc>https://www.buildx.in/construction-cost-in/noida-extension</loc><priority>0.7</priority></url>
+  <url><loc>https://www.buildx.in/construction-cost-in/ghaziabad</loc><priority>0.7</priority></url>
+  <url><loc>https://www.buildx.in/construction-cost-in/mumbai</loc><priority>0.7</priority></url>
+  <url><loc>https://www.buildx.in/construction-cost-in/bangalore</loc><priority>0.7</priority></url>
+  <url><loc>https://www.buildx.in/construction-cost-in/faridabad</loc><priority>0.7</priority></url>
+
+  <!-- Design Library -->
+  <url><loc>https://www.buildx.in/house-designs</loc><priority>0.8</priority></url>
+
+  <!-- Other -->
+  <url><loc>https://www.buildx.in/ai-advisor</loc><priority>0.6</priority></url>
+  <url><loc>https://www.buildx.in/faq</loc><priority>0.6</priority></url>
+  <url><loc>https://www.buildx.in/blog</loc><priority>0.6</priority></url>
+  <url><loc>https://www.buildx.in/about</loc><priority>0.5</priority></url>
+  <url><loc>https://www.buildx.in/contact</loc><priority>0.5</priority></url>
+</urlset>

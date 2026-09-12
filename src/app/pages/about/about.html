@@ -1,0 +1,45 @@
+<section class="section page-hero">
+  <div class="container">
+    <nav class="breadcrumb text-secondary" aria-label="Breadcrumb">
+      <a routerLink="/">Home</a> / <span>About</span>
+    </nav>
+    <span class="eyebrow">Our Mission</span>
+    <h1>Building India's Most Trusted Construction Platform</h1>
+    <p class="text-secondary page-hero__subhead">
+      We believe every homeowner deserves transparent, data-backed construction cost information —
+      not guesswork. BuildX combines verified cost data, curated designs, and AI guidance in one platform.
+    </p>
+  </div>
+</section>
+
+<section class="section section--muted">
+  <div class="container">
+    <div class="stats-grid">
+      @for (stat of stats; track stat.label) {
+        <div class="stat-card">
+          <strong>{{ stat.value }}</strong>
+          <span class="text-secondary">{{ stat.label }}</span>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2>Our Expert Team</h2>
+    <div class="team-grid">
+      @for (member of team; track member.name) {
+        <div class="team-card">
+          <div class="team-card__avatar">
+            <img [src]="member.avatar" width="96" height="96" loading="lazy" [alt]="member.name" />
+          </div>
+          <h3>{{ member.name }}</h3>
+          <p class="text-secondary">{{ member.role }}</p>
+          <p class="team-card__credential text-secondary">{{ member.credential }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+

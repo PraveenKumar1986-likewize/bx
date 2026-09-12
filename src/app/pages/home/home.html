@@ -1,0 +1,246 @@
+<!-- 1. HERO -->
+<section class="hero">
+  <div class="container hero__inner">
+    <div class="hero__copy">
+      <span class="eyebrow">Home Construction Company</span>
+      <h1>BuildX — Home Construction Company in Noida, Greater Noida &amp; Delhi NCR</h1>
+      <p class="hero__subhead text-secondary">
+        Get complete home design, cost estimation, contractor matching, material planning, and
+        turnkey construction services — with full transparency, milestone-based payments, and a
+        written 10-year structural warranty. Trusted by 12,000+ homeowners across 50+ Indian cities.
+      </p>
+      <div class="hero__cta-row">
+        <a routerLink="/cost-calculator" class="btn btn-primary">Get Free Cost Estimate</a>
+        <a routerLink="/contact" class="btn btn-ghost">Talk to Construction Expert</a>
+      </div>
+      <div class="hero__trust">
+        <span>✔ 50+ Indian cities covered</span>
+        <span>✔ 400+ documented quality checks</span>
+        <span>✔ 10-year structural warranty</span>
+        <span>✔ Milestone-based payments</span>
+      </div>
+    </div>
+    <div class="hero__image">
+      <img
+        [src]="heroImage"
+        width="900"
+        height="700"
+        fetchpriority="high"
+        alt="Modern Indian house exterior with contemporary architecture"
+      />
+      <div class="hero__estimate-card">
+        <span class="hero__estimate-label">Project Estimate</span>
+        <span class="hero__estimate-city">📍 {{ heroEstimate.city }}</span>
+        <strong class="hero__estimate-value">₹{{ heroEstimate.low }} – ₹{{ heroEstimate.high }}</strong>
+        <span class="text-secondary">{{ heroEstimate.sqft }} Sq Ft · {{ heroEstimate.tier }}</span>
+        <a routerLink="/cost-calculator" class="hero__estimate-link">View Cost Breakdown →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2. COST CALCULATOR -->
+<section class="section" id="calculator">
+  <div class="container">
+    <div class="section-heading">
+      <span class="eyebrow">Interactive Tool</span>
+      <h2>Construction Cost Calculator</h2>
+      <p class="text-secondary">Get an instant estimate by city, built-up area, and package tier.</p>
+    </div>
+    <app-cost-calculator-widget></app-cost-calculator-widget>
+  </div>
+</section>
+
+<!-- 3. POPULAR SEARCHES -->
+<section class="section section--muted">
+  <div class="container">
+    <h2>Popular Searches</h2>
+    <div class="chip-grid">
+      @for (item of popularSearches; track item.path) {
+        <a [routerLink]="item.path" class="chip">{{ item.label }}</a>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- 3B. WHY BUILDX -->
+<section class="section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="eyebrow">Why BuildX</span>
+      <h2>The Only Platform That Combines Cost Data, Design, and AI Guidance</h2>
+    </div>
+    <div class="differentiator-grid">
+      @for (item of differentiators; track item.title) {
+        <div class="differentiator-card">
+          <h3>{{ item.title }}</h3>
+          <p class="text-secondary">{{ item.desc }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- 4. DESIGN LIBRARY -->
+<section class="section">
+  <div class="container">
+    <div class="section-heading section-heading--row">
+      <div>
+        <span class="eyebrow">House Design Library</span>
+        <h2>Find Your Dream Home Design</h2>
+      </div>
+      <a routerLink="/house-designs" class="btn btn-secondary">View All Designs</a>
+    </div>
+
+    <div class="design-grid">
+      @for (design of featuredDesigns; track design.id) {
+        <a [routerLink]="['/house-designs', design.id]" class="design-card">
+          <div class="design-card__image">
+            <img [src]="designImage(design)" width="640" height="480" loading="lazy" [alt]="design.imageAlt" />
+          </div>
+          <div class="design-card__body">
+            <h3>{{ design.name }}</h3>
+            <p class="text-secondary">{{ design.bhk }}BHK · {{ design.sqft }} sqft · {{ design.floors }} Floor(s)</p>
+            <p class="design-card__price">Starting {{ '₹' + design.startingCost.toLocaleString('en-IN') }}</p>
+          </div>
+        </a>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- 5. AI CONSTRUCTION ADVISOR -->
+<section class="section section--dark">
+  <div class="container ai-advisor-promo">
+    <div class="ai-advisor-promo__copy">
+      <span class="eyebrow">AI Powered</span>
+      <h2>Meet Your AI Construction Advisor</h2>
+      <p class="text-secondary">
+        Ask about construction costs, material recommendations, timelines, or building approvals —
+        get instant, cited answers, 24/7.
+      </p>
+      <a routerLink="/ai-advisor" class="btn btn-accent">Chat with AI Advisor</a>
+    </div>
+    <div class="ai-advisor-promo__preview">
+      <div class="ai-chat-bubble ai-chat-bubble--user">How much for a 2000 sqft house in Gurgaon?</div>
+      <div class="ai-chat-bubble ai-chat-bubble--ai">
+        A 2,000 sqft standard-package home in Gurgaon costs approximately ₹39,00,000.
+        <span class="ai-chat-bubble__source">Source: BuildX Cost Index, Jan 2026</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. CONSTRUCTION JOURNEY -->
+<section class="section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="eyebrow">How It Works</span>
+      <h2>Your Construction Journey, Simplified</h2>
+    </div>
+    <div class="journey-grid">
+      @for (item of journeySteps; track item.step) {
+        <div class="journey-step">
+          <span class="journey-step__number">{{ item.step }}</span>
+          <h3>{{ item.title }}</h3>
+          <p class="text-secondary">{{ item.desc }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- 7. FEATURED PROJECTS -->
+<section class="section section--muted">
+  <div class="container">
+    <div class="section-heading">
+      <span class="eyebrow">Portfolio</span>
+      <h2>Featured Projects</h2>
+    </div>
+    <div class="project-grid">
+      @for (project of featuredProjects; track project.name) {
+        <div class="project-card">
+          <div class="project-card__image">
+            <img [src]="project.image" width="640" height="420" loading="lazy" [alt]="project.alt" />
+            <span class="project-card__badge" [class.project-card__badge--progress]="project.status !== 'Completed'">
+              {{ project.status }}
+            </span>
+          </div>
+          <div class="project-card__body">
+            <h3>{{ project.name }}</h3>
+            <p class="text-secondary">{{ project.location }} · {{ project.sqft }} sqft · {{ project.cost }}</p>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- 8. CUSTOMER REVIEWS -->
+<section class="section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="eyebrow">Social Proof</span>
+      <h2>What Our Customers Say</h2>
+    </div>
+    <div class="review-grid">
+      @for (review of reviews; track review.name) {
+        <div class="review-card">
+          <div class="review-card__stars">{{ '★'.repeat(review.rating) }}{{ '☆'.repeat(5 - review.rating) }}</div>
+          <p>"{{ review.text }}"</p>
+          <div class="review-card__author-row">
+            <img [src]="review.avatar" width="40" height="40" loading="lazy" [alt]="review.name" class="review-card__avatar" />
+            <p class="review-card__author">{{ review.name }}, {{ review.location }}</p>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- 9. RESOURCE HUB -->
+<section class="section section--muted">
+  <div class="container">
+    <div class="section-heading section-heading--row">
+      <div>
+        <span class="eyebrow">Resource Hub</span>
+        <h2>Guides & Insights</h2>
+      </div>
+      <a routerLink="/blog" class="btn btn-secondary">View All Articles</a>
+    </div>
+    <div class="resource-grid">
+      @for (article of resources; track article.title) {
+        <a [routerLink]="article.path" class="resource-card">
+          <div class="resource-card__image">
+            <img [src]="article.image" width="400" height="260" loading="lazy" [alt]="article.title" />
+          </div>
+          <div class="resource-card__body">
+            <span class="resource-card__category">{{ article.category }}</span>
+            <h3>{{ article.title }}</h3>
+          </div>
+        </a>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- 10. FAQ (GEO Q&A blocks) -->
+<section class="section">
+  <div class="container">
+    <app-faq-accordion [faqs]="faqs" heading="Frequently Asked Questions"></app-faq-accordion>
+  </div>
+</section>
+
+<!-- 11. FINAL CTA -->
+<section class="section final-cta">
+  <div class="container final-cta__inner">
+    <div class="final-cta__copy">
+      <h2>Ready to Build Your Dream Home?</h2>
+      <p class="text-secondary">Get a personalized cost estimate and connect with our construction experts today.</p>
+    </div>
+    <div class="final-cta__form">
+      <app-lead-form></app-lead-form>
+    </div>
+  </div>
+</section>
+

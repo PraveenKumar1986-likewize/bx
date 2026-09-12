@@ -1,0 +1,41 @@
+<header class="site-header">
+  <div class="site-header__inner container">
+    <a routerLink="/" class="site-header__logo" (click)="closeMobileNav()">
+      <span class="site-header__logo-mark">B</span>
+      <span class="site-header__logo-text">BuildX</span>
+    </a>
+
+    <nav class="site-header__nav" aria-label="Primary">
+      @for (link of navLinks; track link.path) {
+        <a
+          [routerLink]="link.path"
+          routerLinkActive="is-active"
+          class="site-header__nav-link"
+        >{{ link.label }}</a>
+      }
+    </nav>
+
+    <div class="site-header__actions">
+      <a routerLink="/contact" class="btn btn-primary site-header__cta">Get Free Cost Estimate</a>
+      <button
+        type="button"
+        class="site-header__menu-btn"
+        [attr.aria-expanded]="mobileNavOpen()"
+        aria-label="Toggle navigation menu"
+        (click)="toggleMobileNav()"
+      >
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  @if (mobileNavOpen()) {
+    <nav class="site-header__mobile-nav" aria-label="Mobile">
+      @for (link of navLinks; track link.path) {
+        <a [routerLink]="link.path" (click)="closeMobileNav()">{{ link.label }}</a>
+      }
+      <a routerLink="/contact" class="btn btn-primary" (click)="closeMobileNav()">Get Free Cost Estimate</a>
+    </nav>
+  }
+</header>
+

@@ -1,0 +1,112 @@
+.service-hero__cta-row {
+  display: flex;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+  flex-wrap: wrap;
+}
+
+.service-hero__trust {
+  display: flex;
+  gap: var(--space-6);
+  flex-wrap: wrap;
+  margin-top: var(--space-6);
+  font-size: var(--font-size-caption);
+  color: var(--color-text-secondary);
+}
+
+.service-intro {
+  font-size: var(--font-size-body-l);
+  line-height: var(--line-height-body-l);
+  max-width: 860px;
+  color: var(--color-text-secondary);
+}
+
+.section-heading--row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-6);
+
+  @media (max-width: 1023px) { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: 639px) { grid-template-columns: 1fr; }
+}
+
+.feature-card {
+  padding: var(--space-6);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-surface);
+
+  h3 {
+    font-size: var(--font-size-body-l);
+    margin-bottom: var(--space-2);
+    color: var(--color-brand-primary);
+  }
+}
+
+.chip-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+}
+
+.chip {
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-medium);
+  background: var(--color-bg-surface);
+  transition: all var(--duration-fast) var(--ease-out);
+
+  &:hover {
+    border-color: var(--color-brand-primary);
+    color: var(--color-brand-primary);
+  }
+}
+
+.final-cta__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-12);
+  align-items: center;
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.related-services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+  margin-top: var(--space-6);
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.related-service-card {
+  padding: var(--space-6);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-surface);
+  transition: box-shadow var(--duration-base) var(--ease-out);
+
+  &:hover { box-shadow: var(--shadow-e1); }
+
+  h3 {
+    font-size: var(--font-size-body-l);
+    margin-bottom: var(--space-2);
+    color: var(--color-brand-primary);
+  }
+}

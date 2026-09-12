@@ -1,0 +1,38 @@
+<section class="section page-hero">
+  <div class="container">
+    <nav class="breadcrumb text-secondary" aria-label="Breadcrumb">
+      <a routerLink="/">Home</a> / <span>Blog</span>
+    </nav>
+    <span class="eyebrow">Resource Hub</span>
+    <h1>Guides, Insights & Project Stories</h1>
+    <p class="text-secondary page-hero__subhead">
+      Practical, data-backed articles on construction cost, materials, approvals, and design.
+    </p>
+  </div>
+</section>
+
+<section class="section section--muted">
+  <div class="container">
+    <div class="chip-grid">
+      @for (cat of categories; track cat) {
+        <span class="chip">{{ cat }}</span>
+      }
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="article-grid">
+      @for (article of articles; track article.title) {
+        <article class="article-card">
+          <span class="article-card__category">{{ article.category }}</span>
+          <h2>{{ article.title }}</h2>
+          <p class="text-secondary">{{ article.excerpt }}</p>
+          <span class="article-card__meta text-secondary">{{ article.readTime }}</span>
+        </article>
+      }
+    </div>
+  </div>
+</section>
+

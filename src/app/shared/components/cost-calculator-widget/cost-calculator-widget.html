@@ -1,0 +1,79 @@
+<div class="calc-widget">
+  <div class="calc-widget__inputs">
+    <div class="calc-widget__field">
+      <label for="calc-city">City</label>
+      <select
+        id="calc-city"
+        [ngModel]="citySlug()"
+        (ngModelChange)="onCityChange($event)"
+        [disabled]="!!lockedCitySlug()"
+      >
+        @for (city of cities; track city.slug) {
+          <option [value]="city.slug">{{ city.name }}</option>
+        }
+      </select>
+    </div>
+
+    <div class="calc-widget__field">
+      <label for="calc-sqft">Built-up Area (sqft)</label>
+      <input
+        id="calc-sqft"
+        type="number"
+        step="50"
+        min="200"
+        max="10000"
+        [ngModel]="sqft()"
+        (ngModelChange)="onSqftChange($event)"
+      />
+    </div>
+
+    <div class="calc-widget__field calc-widget__field--tiers">
+      <label>Package</label>
+      <div class="calc-widget__tiers">
+        @for (pkg of packages(); track pkg.tier) {
+          <button
+            type="button"
+            class="calc-widget__tier-btn"
+            [class.is-active]="tier() === pkg.tier"
+            (click)="onTierChange(pkg.tier)"
+          >
+            {{ pkg.tier }}
+          </button>
+        }
+      </div>
+    </div>
+  </div>
+
+  <div class="calc-widget__result">
+    <span class="calc-widget__result-label">Estimated Construction Cost</span>
+    <span class="calc-widget__result-value">{{ formatCurrency(totalCost()) }}</span>
+    <span class="calc-widget__result-rate">
+      {{ formatCurrency(selectedPackage().ratePerSqft) }}/sqft · {{ selectedPackage().description }}
+    </span>
+
+    @if (!compact()) {
+      <div class="calc-widget__breakdown">
+        @for (row of breakdown(); track row.label) {
+          <div class="calc-widget__breakdown-row">
+            <div class="calc-widget__breakdown-bar-track">
+              <div class="calc-widget__breakdown-bar" [style.width.%]="row.percent"></div>
+            </div>
+            <div class="calc-widget__breakdown-meta">
+              <span>{{ row.label }}</span>
+              <span>{{ formatCurrency(row.amount) }}</span>
+            </div>
+          </div>
+        }
+      </div>
+    }
+
+    <a
+      class="btn btn-primary calc-widget__cta"
+      routerLink="/contact"
+      [queryParams]="{ city: citySlug(), sqft: sqft(), tier: tier() }"
+    >
+      Get Detailed Report
+    </a>
+  </div>
+</div>
+

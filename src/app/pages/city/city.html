@@ -1,0 +1,132 @@
+<section class="section page-hero">
+  <div class="container">
+    <nav class="breadcrumb text-secondary" aria-label="Breadcrumb">
+      <a routerLink="/">Home</a> / <a routerLink="/cost-calculator">Cost Calculator</a> / <span>{{ city().name }}</span>
+    </nav>
+    <span class="eyebrow">{{ city().state }}</span>
+    <h1>Construction Cost in {{ city().name }} (2026 Guide)</h1>
+    <p class="text-secondary page-hero__subhead">
+      Average construction cost in {{ city().name }} ranges from
+      ₹{{ city().packages[0].ratePerSqft }} to ₹{{ city().packages[city().packages.length - 1].ratePerSqft }} per sqft.
+      Data last updated {{ city().updatedAt }}.
+    </p>
+    <div class="city-hero__trust">
+      <span>✔ 400+ documented quality checks</span>
+      <span>✔ 10-year structural warranty</span>
+      <span>✔ Milestone-based payments</span>
+      <span>✔ FAR &amp; ground coverage calculator</span>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <app-cost-calculator-widget [lockedCitySlug]="city().slug"></app-cost-calculator-widget>
+  </div>
+</section>
+
+<section class="section section--muted">
+  <div class="container">
+    <h2>Cost Breakdown by Package — {{ city().name }}</h2>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Package</th>
+          <th>Rate / sqft</th>
+          <th>1500 sqft</th>
+          <th>2000 sqft</th>
+          <th>Includes</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (pkg of city().packages; track pkg.tier) {
+          <tr>
+            <td>{{ pkg.tier }}</td>
+            <td>₹{{ pkg.ratePerSqft.toLocaleString('en-IN') }}</td>
+            <td>₹{{ (pkg.ratePerSqft * 1500).toLocaleString('en-IN') }}</td>
+            <td>₹{{ (pkg.ratePerSqft * 2000).toLocaleString('en-IN') }}</td>
+            <td class="text-secondary">{{ pkg.description }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2>Material Prices in {{ city().name }}</h2>
+    <p class="text-secondary">Last updated: {{ city().updatedAt }}</p>
+    <table class="data-table">
+      <thead>
+        <tr><th>Material</th><th>Unit</th><th>Price</th></tr>
+      </thead>
+      <tbody>
+        @for (mat of city().materialPrices; track mat.material) {
+          <tr>
+            <td>{{ mat.material }}</td>
+            <td class="text-secondary">{{ mat.unit }}</td>
+            <td>₹{{ mat.price.toLocaleString('en-IN') }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="section section--muted">
+  <div class="container">
+    <h2>Local Projects in {{ city().name }}</h2>
+    <p class="text-secondary">
+      We've completed {{ city().projectCount }}+ residential projects in {{ city().name }}.
+      <a routerLink="/blog">View project portfolio →</a>
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2>Buildable Area, Warranty &amp; Payment Protection in {{ city().name }}</h2>
+    <div class="city-guarantee-grid">
+      <div class="city-guarantee-card">
+        <h3>Check Your FAR &amp; Ground Coverage</h3>
+        <p class="text-secondary">Before finalizing a design, confirm your legally permissible built-up area under {{ city().name }}'s current municipal norms.</p>
+        <a routerLink="/cost-calculator">Use the FAR Calculator →</a>
+      </div>
+      <div class="city-guarantee-card">
+        <h3>10-Year Structural Warranty</h3>
+        <p class="text-secondary">Every BuildX-verified builder in {{ city().name }} provides a written 10-year structural warranty and 400+ documented quality checkpoints.</p>
+      </div>
+      <div class="city-guarantee-card">
+        <h3>Milestone-Based Payments</h3>
+        <p class="text-secondary">Pay only against completed, inspected stages — booking, foundation, structure, and finishing — never a lump sum upfront.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <app-faq-accordion [faqs]="faqs()" [heading]="'Construction Cost FAQs — ' + city().name"></app-faq-accordion>
+  </div>
+</section>
+
+<section class="section section--muted">
+  <div class="container">
+    <h2>Explore Nearby Cities</h2>
+    <div class="chip-grid">
+      @for (rc of relatedCities(); track rc!.slug) {
+        <a [routerLink]="['/construction-cost-in', rc!.slug]" class="chip">Construction Cost in {{ rc!.name }}</a>
+      }
+    </div>
+  </div>
+</section>
+
+<section class="section final-cta__inner container">
+  <div>
+    <h2>Get a {{ city().name }}-Specific Quote</h2>
+    <p class="text-secondary">Speak with a local construction expert about your plot and requirements.</p>
+  </div>
+  <app-lead-form [title]="'Get Your ' + city().name + ' Cost Report'"></app-lead-form>
+</section>
+

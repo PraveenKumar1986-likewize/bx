@@ -1,0 +1,31 @@
+.compare-banner {
+  background: #EEF1FF;
+  border-bottom: 1px solid var(--color-border);
+  padding: var(--space-3) var(--space-4);
+}
+
+.compare-banner__inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  text-align: center;
+  font-size: var(--font-size-caption);
+
+  a {
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-brand-primary);
+  }
+}
+
+.final-cta__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-12);
+  align-items: center;
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+  }
+}

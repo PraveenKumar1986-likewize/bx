@@ -1,0 +1,88 @@
+<section class="section page-hero">
+  <div class="container">
+    <nav class="breadcrumb text-secondary" aria-label="Breadcrumb">
+      <a routerLink="/">Home</a> / <span>{{ service().navLabel }}</span>
+    </nav>
+    <span class="eyebrow">{{ service().eyebrow }}</span>
+    <h1>{{ service().h1 }}</h1>
+    <p class="text-secondary page-hero__subhead">{{ service().subhead }}</p>
+    <div class="service-hero__cta-row">
+      <a routerLink="/cost-calculator" class="btn btn-primary">Get Free Cost Estimate</a>
+      <a routerLink="/contact" class="btn btn-ghost">Talk to Construction Expert</a>
+    </div>
+    <div class="service-hero__trust">
+      <span>✔ 400+ documented quality checks</span>
+      <span>✔ 10-year structural warranty</span>
+      <span>✔ Milestone-based payments</span>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <p class="service-intro">{{ service().intro }}</p>
+  </div>
+</section>
+
+<section class="section section--muted">
+  <div class="container">
+    <h2>What's Included</h2>
+    <div class="feature-grid">
+      @for (feature of service().features; track feature.title) {
+        <div class="feature-card">
+          <h3>{{ feature.title }}</h3>
+          <p class="text-secondary">{{ feature.desc }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-heading section-heading--row">
+      <div>
+        <span class="eyebrow">Locations Served</span>
+        <h2>{{ service().navLabel }} Across Delhi NCR</h2>
+      </div>
+      <a routerLink="/cost-calculator" class="btn btn-secondary">Compare City Costs</a>
+    </div>
+    <div class="chip-grid">
+      @for (city of cities; track city.slug) {
+        <a [routerLink]="['/construction-cost-in', city.slug]" class="chip">{{ service().navLabel }} in {{ city.name }}</a>
+      }
+    </div>
+  </div>
+</section>
+
+<section class="section section--muted">
+  <div class="container final-cta__inner">
+    <div>
+      <h2>Get a Personalized {{ service().navLabel }} Quote</h2>
+      <p class="text-secondary">Tell us about your plot and requirements — a construction expert will call you within 24 hours.</p>
+    </div>
+    <app-lead-form [title]="'Get Your ' + service().navLabel + ' Quote'"></app-lead-form>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <app-faq-accordion [faqs]="service().faqs" [heading]="service().navLabel + ' FAQs'"></app-faq-accordion>
+  </div>
+</section>
+
+@if (relatedServices().length > 0) {
+  <section class="section section--muted">
+    <div class="container">
+      <h2>Related Services</h2>
+      <div class="related-services-grid">
+        @for (rs of relatedServices(); track rs.slug) {
+          <a [routerLink]="['/', rs.slug]" class="related-service-card">
+            <h3>{{ rs.navLabel }}</h3>
+            <p class="text-secondary">{{ rs.subhead }}</p>
+          </a>
+        }
+      </div>
+    </div>
+  </section>
+}

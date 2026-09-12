@@ -1,0 +1,87 @@
+<section class="section page-hero">
+  <div class="container">
+    <nav class="breadcrumb text-secondary" aria-label="Breadcrumb">
+      <a routerLink="/">Home</a> / <span>Home Construction in {{ city().name }}</span>
+    </nav>
+    <span class="eyebrow">{{ city().state }}</span>
+    <h1>Home Construction Company in {{ city().name }}</h1>
+    <p class="text-secondary page-hero__subhead">
+      Verified home construction contractors in {{ city().name }} — transparent
+      ₹{{ city().packages[0].ratePerSqft }}–₹{{ city().packages[city().packages.length - 1].ratePerSqft }}/sqft
+      pricing, milestone-based payments, and a written 10-year structural warranty.
+    </p>
+    <div class="location-hero__cta-row">
+      <a routerLink="/cost-calculator" class="btn btn-primary">Get Free Cost Estimate</a>
+      <a routerLink="/contact" class="btn btn-ghost">Talk to Construction Expert</a>
+    </div>
+    <div class="location-hero__trust">
+      <span>✔ {{ city().projectCount }}+ projects completed in {{ city().name }}</span>
+      <span>✔ 400+ documented quality checks</span>
+      <span>✔ 10-year structural warranty</span>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-heading section-heading--row">
+      <div>
+        <span class="eyebrow">Services</span>
+        <h2>Construction Services in {{ city().name }}</h2>
+      </div>
+    </div>
+    <div class="chip-grid">
+      @for (svc of services; track svc.slug) {
+        <a [routerLink]="['/', svc.slug]" class="chip">{{ svc.navLabel }} in {{ city().name }}</a>
+      }
+    </div>
+  </div>
+</section>
+
+<section class="section section--muted">
+  <div class="container">
+    <h2>{{ city().name }} Construction Cost — Package Summary</h2>
+    <table class="data-table">
+      <thead>
+        <tr><th>Package</th><th>Rate / sqft</th><th>Includes</th></tr>
+      </thead>
+      <tbody>
+        @for (pkg of city().packages; track pkg.tier) {
+          <tr>
+            <td>{{ pkg.tier }}</td>
+            <td>₹{{ pkg.ratePerSqft.toLocaleString('en-IN') }}</td>
+            <td class="text-secondary">{{ pkg.description }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+    <a [routerLink]="['/construction-cost-in', city().slug]" class="location-detail-link">
+      View full {{ city().name }} cost breakdown & material prices →
+    </a>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <app-faq-accordion [faqs]="faqs()" [heading]="'Home Construction FAQs — ' + city().name"></app-faq-accordion>
+  </div>
+</section>
+
+<section class="section section--muted">
+  <div class="container">
+    <h2>Nearby Locations</h2>
+    <div class="chip-grid">
+      @for (rc of relatedCities(); track rc.slug) {
+        <a [routerLink]="['/construction-cost-in', rc.slug]" class="chip">Construction Cost in {{ rc.name }}</a>
+      }
+    </div>
+  </div>
+</section>
+
+<section class="section final-cta__inner container">
+  <div>
+    <h2>Get a {{ city().name }}-Specific Construction Quote</h2>
+    <p class="text-secondary">Speak with a local construction expert about your plot and requirements.</p>
+  </div>
+  <app-lead-form [title]="'Get Your ' + city().name + ' Construction Quote'"></app-lead-form>
+</section>

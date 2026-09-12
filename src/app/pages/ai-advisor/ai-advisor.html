@@ -1,0 +1,75 @@
+<section class="ai-page">
+  <div class="container ai-page__container">
+    <header class="ai-page__header">
+      <span class="eyebrow">AI Powered</span>
+      <h1>AI Construction Advisor</h1>
+      <p class="text-secondary">Ask anything about construction cost, materials, timelines, or approvals.</p>
+    </header>
+
+    <div class="ai-chat">
+      @if (messages().length === 0) {
+        <div class="ai-chat__empty">
+          <p class="text-secondary">Try one of these to get started:</p>
+          <div class="ai-chat__prompts">
+            @for (p of suggestedPrompts; track p.label) {
+              <button type="button" class="ai-chat__prompt-chip" (click)="sendPrompt(p.prompt)">
+                <span>{{ p.icon }}</span> {{ p.label }}
+              </button>
+            }
+          </div>
+        </div>
+      }
+
+      <div class="ai-chat__messages">
+        @for (msg of messages(); track $index) {
+          <div class="ai-chat__message" [class.ai-chat__message--user]="msg.role === 'user'">
+            <div class="ai-chat__bubble">
+              <p>{{ msg.text }}</p>
+              @if (msg.sources && msg.sources.length) {
+                <div class="ai-chat__sources">
+                  @for (src of msg.sources; track src.path) {
+                    <a [routerLink]="src.path" class="ai-chat__source-chip">🔗 {{ src.label }}</a>
+                  }
+                </div>
+              }
+            </div>
+          </div>
+        }
+
+        @if (isTyping()) {
+          <div class="ai-chat__message">
+            <div class="ai-chat__bubble ai-chat__bubble--typing">
+              <span></span><span></span><span></span>
+            </div>
+          </div>
+        }
+
+        @if (showSoftCta()) {
+          <div class="ai-chat__cta">
+            <p>Want a detailed, personalized quote based on this conversation?</p>
+            <a routerLink="/contact" class="btn btn-accent">Get a Detailed Quote</a>
+          </div>
+        }
+
+        <div #scrollAnchor></div>
+      </div>
+
+      <form class="ai-chat__composer" (ngSubmit)="onSubmit()">
+        <input
+          type="text"
+          placeholder="Ask about construction cost, materials, timelines…"
+          [ngModel]="inputText()"
+          (ngModelChange)="inputText.set($event)"
+          name="prompt"
+        />
+        <button type="submit" class="btn btn-primary" [disabled]="isTyping()">Send</button>
+      </form>
+
+      <p class="ai-chat__disclaimer">
+        Estimates are indicative and based on our Construction Cost Index (last updated January 2026).
+        For a binding quote, please request a callback.
+      </p>
+    </div>
+  </div>
+</section>
+

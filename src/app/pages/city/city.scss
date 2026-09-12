@@ -1,0 +1,50 @@
+.final-cta__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-12);
+  align-items: center;
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.city-hero__trust {
+  display: flex;
+  gap: var(--space-6);
+  flex-wrap: wrap;
+  margin-top: var(--space-6);
+  font-size: var(--font-size-caption);
+  color: var(--color-text-secondary);
+}
+
+.city-guarantee-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+  margin-top: var(--space-6);
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.city-guarantee-card {
+  padding: var(--space-6);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-surface);
+
+  h3 {
+    font-size: var(--font-size-body-l);
+    margin-bottom: var(--space-2);
+    color: var(--color-brand-primary);
+  }
+
+  a {
+    display: inline-block;
+    margin-top: var(--space-2);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-brand-primary);
+  }
+}

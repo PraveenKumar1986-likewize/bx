@@ -1,0 +1,29 @@
+<section class="section page-hero">
+  <div class="container">
+    <nav class="breadcrumb text-secondary" aria-label="Breadcrumb">
+      <a routerLink="/">Home</a> / <span>Contact</span>
+    </nav>
+    <span class="eyebrow">Get In Touch</span>
+    <h1>Talk to a Construction Expert</h1>
+    <p class="text-secondary page-hero__subhead">
+      Share a few details and our team will get back to you within 24 hours.
+    </p>
+    @if (contextNote) {
+      <p class="contact-context">{{ contextNote }}</p>
+    }
+  </div>
+</section>
+
+<section class="section">
+  <div class="container contact-layout">
+    <app-lead-form title="Request a Callback" subtitle="Our construction experts typically respond within a few hours."></app-lead-form>
+
+    <div class="contact-details">
+      <h3>Other Ways to Reach Us</h3>
+      <p class="text-secondary">📞 +91 98765 43210</p>
+      <p class="text-secondary">✉️ hello&#64;buildx.in</p>
+      <p class="text-secondary">📍 Gurgaon, Haryana, India</p>
+    </div>
+  </div>
+</section>
+

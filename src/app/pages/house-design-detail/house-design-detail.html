@@ -1,0 +1,75 @@
+<section class="section page-hero">
+  <div class="container">
+    <nav class="breadcrumb text-secondary" aria-label="Breadcrumb">
+      <a routerLink="/">Home</a> / <a routerLink="/house-designs">House Designs</a> / <span>{{ design().name }}</span>
+    </nav>
+  </div>
+</section>
+
+<section class="section design-detail">
+  <div class="container design-detail__layout">
+    <div class="design-detail__gallery">
+      <div class="design-detail__hero-image">
+        <img [src]="heroThumb()" width="900" height="640" [alt]="design().imageAlt" fetchpriority="high" />
+      </div>
+      <div class="design-detail__thumbs">
+        @for (thumb of detailThumbs; track thumb) {
+          <div class="design-detail__thumb">
+            <img [src]="thumb" width="300" height="220" loading="lazy" alt="{{ design().name }} reference photo" />
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="design-detail__info">
+      <span class="eyebrow">{{ design().style }}</span>
+      <h1>{{ design().name }}</h1>
+      <p class="text-secondary">{{ design().description }}</p>
+
+      <dl class="spec-list">
+        <div><dt>BHK</dt><dd>{{ design().bhk }}</dd></div>
+        <div><dt>Built-up Area</dt><dd>{{ design().sqft }} sqft</dd></div>
+        <div><dt>Floors</dt><dd>{{ design().floors }}</dd></div>
+        <div><dt>Facing</dt><dd>{{ design().facing }}</dd></div>
+      </dl>
+
+      <div class="design-detail__cost-box">
+        <span class="text-secondary">Estimated Construction Cost</span>
+        <strong>{{ formatCurrency(estimatedCost()) }}</strong>
+        <a routerLink="/cost-calculator" class="btn btn-primary">Estimate Cost of This Design</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--muted">
+  <div class="container final-cta__inner">
+    <div>
+      <h2>Build This Design</h2>
+      <p class="text-secondary">Get a personalized quote to build {{ design().name }} on your plot.</p>
+    </div>
+    <app-lead-form [title]="'Build ' + design().name" ctaLabel="Get a Quote"></app-lead-form>
+  </div>
+</section>
+
+@if (relatedDesigns().length > 0) {
+  <section class="section">
+    <div class="container">
+      <h2>Similar Designs</h2>
+      <div class="design-grid">
+        @for (rd of relatedDesigns(); track rd.id) {
+          <a [routerLink]="['/house-designs', rd.id]" class="design-card">
+            <div class="design-card__image">
+              <img [src]="designImage(rd)" width="640" height="480" loading="lazy" [alt]="rd.imageAlt" />
+            </div>
+            <div class="design-card__body">
+              <h3>{{ rd.name }}</h3>
+              <p class="text-secondary">{{ rd.bhk }}BHK · {{ rd.sqft }} sqft</p>
+            </div>
+          </a>
+        }
+      </div>
+    </div>
+  </section>
+}
+

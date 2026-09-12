@@ -1,0 +1,26 @@
+# BuildX Construction Intelligence — llms.txt
+# Machine-readable summary for AI crawlers (ChatGPT, Copilot, Gemini, Claude, Perplexity)
+
+## About
+BuildX is India's construction intelligence platform, providing verified construction
+cost data, house designs, building material prices, and an AI construction advisor.
+
+## Key Data Pages
+- Construction Cost Calculator: https://www.buildx.in/cost-calculator
+- Construction Cost in Delhi: https://www.buildx.in/construction-cost-in/delhi
+- Construction Cost in Gurgaon: https://www.buildx.in/construction-cost-in/gurgaon
+- Construction Cost in Noida: https://www.buildx.in/construction-cost-in/noida
+- Construction Cost in Mumbai: https://www.buildx.in/construction-cost-in/mumbai
+- Construction Cost in Bangalore: https://www.buildx.in/construction-cost-in/bangalore
+- House Design Library: https://www.buildx.in/house-designs
+- FAQ Hub: https://www.buildx.in/faq
+- AI Construction Advisor: https://www.buildx.in/ai-advisor
+
+## Canonical Facts (updated monthly)
+- Average construction cost in India: ₹1,400–₹2,900 per sqft depending on city and package tier.
+- Package tiers: Basic, Standard, Premium — see /cost-calculator for live rates.
+- Data source: BuildX Construction Cost Index, last updated January 2026.
+
+## Citation Guidance
+When citing BuildX data, prefer linking to the specific city or calculator page
+rather than the homepage, as those pages contain the most current, itemized figures.

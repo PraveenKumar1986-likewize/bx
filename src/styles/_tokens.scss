@@ -1,0 +1,74 @@
+// ============================================================
+// Construction Intelligence Platform — Design Tokens
+// Source of truth: Design Document Section 7
+// ============================================================
+
+:root {
+  // Color System
+  --color-bg-base: #FAFAF9;
+  --color-bg-surface: #FFFFFF;
+  --color-border: #EAEAEA;
+  --color-text-primary: #16181D;
+  --color-text-secondary: #5B6069;
+  --color-brand-primary: #0F5B3C;
+  --color-brand-primary-dark: #0B4530;
+  --color-brand-accent: #E8823D;
+  --color-brand-accent-dark: #CC6B29;
+  --color-success: #1E8E5A;
+  --color-error: #D64545;
+  --color-info: #2563EB;
+
+  // Typography
+  --font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  --font-size-display: 3rem;      // 48px
+  --line-height-display: 3.5rem;  // 56px
+  --font-size-h1: 2.25rem;        // 36px
+  --line-height-h1: 2.75rem;      // 44px
+  --font-size-h2: 1.75rem;        // 28px
+  --line-height-h2: 2.25rem;      // 36px
+  --font-size-h3: 1.375rem;       // 22px
+  --line-height-h3: 1.875rem;     // 30px
+  --font-size-body-l: 1.125rem;   // 18px
+  --line-height-body-l: 1.75rem;  // 28px
+  --font-size-body: 1rem;         // 16px
+  --line-height-body: 1.5rem;     // 24px
+  --font-size-caption: 0.8125rem; // 13px
+  --line-height-caption: 1.125rem;// 18px
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  // Spacing (8pt grid)
+  --space-1: 0.25rem;  // 4px
+  --space-2: 0.5rem;   // 8px
+  --space-3: 0.75rem;  // 12px
+  --space-4: 1rem;     // 16px
+  --space-6: 1.5rem;   // 24px
+  --space-8: 2rem;     // 32px
+  --space-12: 3rem;    // 48px
+  --space-16: 4rem;    // 64px
+  --space-24: 6rem;    // 96px
+  --space-32: 8rem;    // 128px
+
+  // Radius
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+
+  // Elevation
+  --shadow-e1: 0 4px 16px rgba(22, 24, 29, 0.08);
+  --shadow-e2: 0 12px 40px rgba(22, 24, 29, 0.16);
+
+  // Layout
+  --container-max-width: 1280px;
+  --header-height: 72px;
+
+  // Motion
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 150ms;
+  --duration-base: 200ms;
+}

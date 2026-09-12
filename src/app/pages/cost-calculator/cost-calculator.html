@@ -1,0 +1,65 @@
+<div class="compare-banner">
+  <div class="container compare-banner__inner">
+    <span>Trying our next-gen calculator? <strong>Cost Calculator V2 (Beta)</strong> now has a 3D preview, live breakdowns &amp; price trends.</span>
+    <a routerLink="/cost-calculator-v2">Try Calculator V2 →</a>
+  </div>
+</div>
+
+<section class="section page-hero">
+  <div class="container">
+    <nav class="breadcrumb text-secondary" aria-label="Breadcrumb">
+      <a routerLink="/">Home</a> / <span>Construction Cost Calculator</span>
+    </nav>
+    <span class="eyebrow">Interactive Tool</span>
+    <h1>Construction Cost Calculator</h1>
+    <p class="text-secondary page-hero__subhead">
+      Get an instant, data-backed construction cost estimate for any city in India.
+      Adjust built-up area and package tier to see a full cost breakdown.
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <app-cost-calculator-widget></app-cost-calculator-widget>
+  </div>
+</section>
+
+<section class="section section--muted">
+  <div class="container">
+    <h2>Estimate by Built-up Area</h2>
+    <div class="chip-grid">
+      @for (sqft of sqftShortcuts; track sqft) {
+        <a [routerLink]="['/cost-calculator/by-sqft', sqft]" class="chip">{{ sqft }} sqft</a>
+      }
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2>Estimate by City</h2>
+    <div class="chip-grid">
+      @for (city of cities; track city.slug) {
+        <a [routerLink]="['/construction-cost-in', city.slug]" class="chip">Construction Cost in {{ city.name }}</a>
+      }
+    </div>
+  </div>
+</section>
+
+<section class="section section--muted">
+  <div class="container">
+    <app-faq-accordion [faqs]="faqs" heading="Construction Cost FAQs"></app-faq-accordion>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container final-cta__inner">
+    <div>
+      <h2>Want a Verified Quote?</h2>
+      <p class="text-secondary">Our experts will review your requirements and send a detailed, itemized quote.</p>
+    </div>
+    <app-lead-form></app-lead-form>
+  </div>
+</section>
+

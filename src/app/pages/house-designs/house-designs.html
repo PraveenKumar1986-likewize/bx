@@ -1,0 +1,98 @@
+<section class="section page-hero">
+  <div class="container">
+    <nav class="breadcrumb text-secondary" aria-label="Breadcrumb">
+      <a routerLink="/">Home</a> / <span>House Designs</span>
+    </nav>
+    <span class="eyebrow">Design Library</span>
+    <h1>House Design Library</h1>
+    <p class="text-secondary page-hero__subhead">
+      Browse verified house designs with floor plans, specs, and instant cost estimates.
+    </p>
+  </div>
+</section>
+
+<section class="section design-library">
+  <div class="container design-library__layout">
+    <aside class="design-library__filters">
+      <h3>Filters</h3>
+
+      <div class="filter-group">
+        <label for="search">Search</label>
+        <input id="search" type="text" placeholder="Search by name or style…" [(ngModel)]="searchTerm" />
+      </div>
+
+      <div class="filter-group">
+        <label>Style</label>
+        <div class="filter-pills">
+          <button
+            type="button"
+            class="filter-pill"
+            [class.is-active]="selectedStyle() === 'All'"
+            (click)="selectedStyle.set('All')"
+          >All</button>
+          @for (style of styles; track style) {
+            <button
+              type="button"
+              class="filter-pill"
+              [class.is-active]="selectedStyle() === style"
+              (click)="selectedStyle.set(style)"
+            >{{ style }}</button>
+          }
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <label for="budget">Max Budget: {{ formatCurrency(maxBudget()) }}</label>
+        <input
+          id="budget"
+          type="range"
+          min="1500000"
+          max="10000000"
+          step="500000"
+          [(ngModel)]="maxBudget"
+        />
+      </div>
+    </aside>
+
+    <div class="design-library__results">
+      <p class="text-secondary design-library__count">{{ filteredDesigns().length }} designs found</p>
+
+      <div class="design-grid">
+        @for (design of filteredDesigns(); track design.id) {
+          <div class="design-card">
+            <a [routerLink]="['/house-designs', design.id]" class="design-card__link">
+              <div class="design-card__image">
+                <img [src]="designImage(design)" width="640" height="480" loading="lazy" [alt]="design.imageAlt" />
+              </div>
+            </a>
+            <button
+              type="button"
+              class="design-card__save"
+              [class.is-saved]="isSaved(design.id)"
+              (click)="toggleSave(design.id)"
+              [attr.aria-label]="isSaved(design.id) ? 'Remove from saved designs' : 'Save design'"
+            >{{ isSaved(design.id) ? '♥' : '♡' }}</button>
+            <a [routerLink]="['/house-designs', design.id]" class="design-card__body">
+              <h3>{{ design.name }}</h3>
+              <p class="text-secondary">{{ design.bhk }}BHK · {{ design.sqft }} sqft · {{ design.floors }} Floor(s)</p>
+              <p class="design-card__price">Starting {{ formatCurrency(design.startingCost) }}</p>
+            </a>
+          </div>
+        } @empty {
+          <p class="text-secondary">No designs match your filters. Try widening your budget or style selection.</p>
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--muted">
+  <div class="container final-cta__inner">
+    <div>
+      <h2>Can't Find the Perfect Design?</h2>
+      <p class="text-secondary">Our architects can create a fully custom design for your plot and budget.</p>
+    </div>
+    <app-lead-form title="Request a Custom Design" ctaLabel="Talk to an Architect"></app-lead-form>
+  </div>
+</section>
+

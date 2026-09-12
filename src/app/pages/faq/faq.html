@@ -1,0 +1,41 @@
+<section class="section page-hero">
+  <div class="container">
+    <nav class="breadcrumb text-secondary" aria-label="Breadcrumb">
+      <a routerLink="/">Home</a> / <span>FAQ Hub</span>
+    </nav>
+    <span class="eyebrow">Answers, Organized</span>
+    <h1>Construction FAQ Hub</h1>
+    <p class="text-secondary page-hero__subhead">
+      Every question we've answered about construction cost, materials, approvals, and design — in one place.
+    </p>
+  </div>
+</section>
+
+<section class="section section--muted">
+  <div class="container">
+    <h2>Browse by Topic</h2>
+    <div class="topic-grid">
+      @for (topic of topicClusters; track topic.title) {
+        <a [routerLink]="topic.path" class="topic-card">
+          <h3>{{ topic.title }}</h3>
+          <span class="text-secondary">{{ topic.count }} questions</span>
+        </a>
+      }
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <app-faq-accordion [faqs]="generalFaqs" heading="General Construction FAQs"></app-faq-accordion>
+  </div>
+</section>
+
+@for (group of cityFaqGroups; track group.slug) {
+  <section class="section section--muted">
+    <div class="container">
+      <app-faq-accordion [faqs]="group.faqs" [heading]="group.city + ' FAQs'"></app-faq-accordion>
+    </div>
+  </section>
+}
+

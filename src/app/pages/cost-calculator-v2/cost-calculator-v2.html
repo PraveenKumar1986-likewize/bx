@@ -1,0 +1,378 @@
+<div class="calc-v2">
+  <div class="calc-v2__compare-banner container">
+    <span>You're viewing <strong>Cost Calculator V2 (Beta)</strong> — our next-gen AI calculator.</span>
+    <a routerLink="/cost-calculator">Compare with Calculator V1 →</a>
+  </div>
+
+  <div class="calc-v2__layout container">
+    <!-- LEFT MARKETING PANEL -->
+    <aside class="calc-v2__intro">
+      <h1>Next-Gen Construction Cost Calculator</h1>
+      <p class="calc-v2__intro-tagline">Smarter. More Accurate. Built for You.</p>
+      <p class="text-secondary">
+        We analyzed leading calculators like ZuildUp and Brick &amp; Bolt and designed a superior
+        experience that's more intuitive, transparent, and powerful.
+      </p>
+
+      <div class="calc-v2__feature-list">
+        @for (feature of features; track feature.title) {
+          <div class="calc-v2__feature">
+            <span class="calc-v2__feature-icon">{{ feature.icon }}</span>
+            <div>
+              <h3>{{ feature.title }}</h3>
+              <p class="text-secondary">{{ feature.desc }}</p>
+            </div>
+          </div>
+        }
+      </div>
+    </aside>
+
+    <!-- APP PANEL -->
+    <div class="calc-v2__app">
+      <!-- TOP BAR -->
+      <div class="calc-v2__topbar">
+        <div class="calc-v2__brand">
+          <span class="calc-v2__brand-mark">🏠</span>
+          <div>
+            <strong>BuildSmart</strong>
+            <span>COST CALCULATOR</span>
+          </div>
+        </div>
+
+        <div class="calc-v2__stepper">
+          @for (label of stepLabels; track label; let i = $index) {
+            <button
+              type="button"
+              class="calc-v2__step"
+              [class.is-active]="activeStep() === i + 1"
+              [class.is-done]="activeStep() > i + 1"
+              (click)="goToStep(i + 1)"
+            >
+              <span class="calc-v2__step-num">{{ i + 1 }}</span>
+              <span class="calc-v2__step-label">{{ label }}</span>
+            </button>
+          }
+        </div>
+
+        <div class="calc-v2__topbar-actions">
+          <select class="calc-v2__location-select" [ngModel]="citySlug()" (ngModelChange)="citySlug.set($event)">
+            @for (city of cities; track city.slug) {
+              <option [value]="city.slug">{{ city.name }}, {{ city.state.slice(0, 2).toUpperCase() }}</option>
+            }
+          </select>
+          <span class="calc-v2__icon-btn" aria-hidden="true">🔔</span>
+          <img [src]="expertAvatar" width="32" height="32" alt="Account" class="calc-v2__avatar" />
+        </div>
+      </div>
+
+      <!-- BODY GRID -->
+      <div class="calc-v2__body">
+        <!-- FORM CARD -->
+        <div class="calc-v2__card calc-v2__form-card">
+          @switch (activeStep()) {
+            @case (1) {
+              <h2>Project Details</h2>
+              <p class="text-secondary">Tell us about your project</p>
+
+              <label class="calc-v2__label">Construction Type</label>
+              <div class="calc-v2__type-grid">
+                @for (type of constructionTypes; track type) {
+                  <button
+                    type="button"
+                    class="calc-v2__type-card"
+                    [class.is-active]="constructionType() === type"
+                    (click)="constructionType.set(type)"
+                  >{{ type }}</button>
+                }
+              </div>
+
+              <label class="calc-v2__label" for="buildingType">Building Type</label>
+              <select id="buildingType" class="calc-v2__select" [ngModel]="buildingType()" (ngModelChange)="buildingType.set($event)">
+                @for (type of buildingTypes; track type) {
+                  <option [value]="type">{{ type }}</option>
+                }
+              </select>
+
+              <label class="calc-v2__label" for="builtUpArea">Built-up Area</label>
+              <div class="calc-v2__input-suffix">
+                <input
+                  id="builtUpArea"
+                  type="number"
+                  [ngModel]="builtUpArea()"
+                  (ngModelChange)="onAreaChange($event)"
+                />
+                <span>sq.ft</span>
+              </div>
+
+              <label class="calc-v2__label">Floors</label>
+              <div class="calc-v2__floor-grid">
+                @for (opt of floorOptions; track opt) {
+                  <button
+                    type="button"
+                    class="calc-v2__floor-btn"
+                    [class.is-active]="floors() === opt"
+                    (click)="floors.set(opt)"
+                  >{{ opt }}</button>
+                }
+              </div>
+
+              <label class="calc-v2__label" for="location">Location</label>
+              <select id="location" class="calc-v2__select" [ngModel]="citySlug()" (ngModelChange)="citySlug.set($event)">
+                @for (city of cities; track city.slug) {
+                  <option [value]="city.slug">{{ city.name }}, {{ city.state }}</option>
+                }
+              </select>
+
+              <button type="button" class="btn btn-primary calc-v2__continue" (click)="nextStep()">Continue →</button>
+            }
+            @case (2) {
+              <h2>Building Specs</h2>
+              <p class="text-secondary">Fine-tune the quality &amp; specification</p>
+
+              <label class="calc-v2__label">Quality Grade</label>
+              <div class="calc-v2__type-grid">
+                @for (grade of ['Basic', 'Standard', 'Premium']; track grade) {
+                  <button
+                    type="button"
+                    class="calc-v2__type-card"
+                    [class.is-active]="qualityGrade() === grade"
+                    (click)="qualityGrade.set($any(grade))"
+                  >{{ grade }}</button>
+                }
+              </div>
+
+              <label class="calc-v2__label">Basement</label>
+              <div class="calc-v2__floor-grid">
+                <button type="button" class="calc-v2__floor-btn" [class.is-active]="!hasBasement()" (click)="hasBasement.set(false)">No</button>
+                <button type="button" class="calc-v2__floor-btn" [class.is-active]="hasBasement()" (click)="hasBasement.set(true)">Yes</button>
+              </div>
+
+              <label class="calc-v2__label">Parking</label>
+              <div class="calc-v2__floor-grid">
+                <button type="button" class="calc-v2__floor-btn" [class.is-active]="!hasParking()" (click)="hasParking.set(false)">No</button>
+                <button type="button" class="calc-v2__floor-btn" [class.is-active]="hasParking()" (click)="hasParking.set(true)">Yes</button>
+              </div>
+
+              <div class="calc-v2__step-actions">
+                <button type="button" class="btn btn-ghost" (click)="prevStep()">← Back</button>
+                <button type="button" class="btn btn-primary calc-v2__continue" (click)="nextStep()">Continue →</button>
+              </div>
+            }
+            @case (3) {
+              <h2>Customization</h2>
+              <p class="text-secondary">Choose material grade &amp; interior finish level</p>
+
+              <label class="calc-v2__label">Material Brand</label>
+              <div class="calc-v2__type-grid">
+                @for (brand of ['Standard', 'Branded', 'Luxury']; track brand) {
+                  <button
+                    type="button"
+                    class="calc-v2__type-card"
+                    [class.is-active]="materialBrand() === brand"
+                    (click)="materialBrand.set($any(brand))"
+                  >{{ brand }}</button>
+                }
+              </div>
+
+              <label class="calc-v2__label" for="interiorLevel">Interior Finish Level: {{ interiorLevel() }}%</label>
+              <input id="interiorLevel" type="range" min="0" max="100" [ngModel]="interiorLevel()" (ngModelChange)="interiorLevel.set($event)" />
+
+              <div class="calc-v2__step-actions">
+                <button type="button" class="btn btn-ghost" (click)="prevStep()">← Back</button>
+                <button type="button" class="btn btn-primary calc-v2__continue" (click)="nextStep()">Continue →</button>
+              </div>
+            }
+            @case (4) {
+              <h2>Your Estimate</h2>
+              <p class="text-secondary">Here's your personalized construction estimate summary</p>
+
+              <dl class="calc-v2__summary-list">
+                <div><dt>Construction Type</dt><dd>{{ constructionType() }}</dd></div>
+                <div><dt>Building Type</dt><dd>{{ buildingType() }}</dd></div>
+                <div><dt>Built-up Area</dt><dd>{{ builtUpArea() }} sq.ft</dd></div>
+                <div><dt>Floors</dt><dd>{{ floors() }}</dd></div>
+                <div><dt>Location</dt><dd>{{ selectedCity().name }}</dd></div>
+                <div><dt>Package</dt><dd>{{ activeTier().tier }}</dd></div>
+              </dl>
+
+              <a routerLink="/contact" class="btn btn-primary calc-v2__continue">Get Detailed Quote</a>
+
+              <div class="calc-v2__step-actions">
+                <button type="button" class="btn btn-ghost" (click)="prevStep()">← Back</button>
+              </div>
+            }
+          }
+        </div>
+
+        <!-- 3D PREVIEW CARD -->
+        <div class="calc-v2__card calc-v2__preview-card">
+          <div class="calc-v2__preview-header">
+            <span>Live {{ previewMode() }} Preview <span class="calc-v2__beta-pill">Beta</span></span>
+            <div class="calc-v2__preview-toggle">
+              <button type="button" class="calc-v2__icon-btn" aria-label="Refresh preview">↻</button>
+              <button type="button" class="calc-v2__toggle-btn" [class.is-active]="previewMode() === '2D'" (click)="setPreviewMode('2D')">2D</button>
+              <button type="button" class="calc-v2__toggle-btn" [class.is-active]="previewMode() === '3D'" (click)="setPreviewMode('3D')">3D</button>
+            </div>
+          </div>
+
+          <div class="calc-v2__preview-image">
+            <img [src]="heroPreviewImage()" width="1000" height="640" loading="lazy" alt="{{ buildingType() }} construction preview" />
+            <div class="calc-v2__preview-caption">Drag to rotate • Scroll to zoom • Click hotspots</div>
+          </div>
+
+          <div class="calc-v2__preview-dots">
+            @for (dot of [0, 1, 2, 3]; track dot) {
+              <span class="calc-v2__dot" [class.is-active]="activeSlide() === dot" (click)="setSlide(dot)"></span>
+            }
+          </div>
+        </div>
+
+        <!-- ESTIMATE SIDEBAR -->
+        <div class="calc-v2__sidebar">
+          <div class="calc-v2__card calc-v2__estimate-card">
+            <div class="calc-v2__estimate-head">
+              <span>Estimated Cost</span>
+              <button type="button" class="calc-v2__share-btn">⇧ Share</button>
+            </div>
+            <strong class="calc-v2__estimate-value">{{ formatCurrency(estimatedCost()) }}</strong>
+            <span class="text-secondary">Total Estimated Cost (Incl. taxes)</span>
+
+            <div class="calc-v2__estimate-rate-row">
+              <span>₹{{ activeTier().ratePerSqft.toLocaleString('en-IN') }} / sq.ft</span>
+              <span class="calc-v2__badge-green">-3.2% vs last month</span>
+            </div>
+
+            <a routerLink="/contact" class="btn btn-primary calc-v2__breakdown-btn">View Detailed Breakdown</a>
+
+            <div class="calc-v2__estimate-meta">
+              <div>
+                <span class="text-secondary">⏱ Estimated Time</span>
+                <strong>8 - 10 Months</strong>
+              </div>
+              <div>
+                <span class="text-secondary">⭐ Quality Standard</span>
+                <strong>{{ activeTier().tier }}</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="calc-v2__card calc-v2__help-card">
+            <h3>Need Help?</h3>
+            <p class="text-secondary">Talk to our construction experts for free guidance &amp; better quotes.</p>
+            <div class="calc-v2__help-footer">
+              <a routerLink="/contact" class="btn btn-secondary">Connect Now</a>
+              <div class="calc-v2__help-avatars">
+                <img [src]="expertAvatar" width="32" height="32" alt="Construction expert" />
+                <img [src]="expertAvatar2" width="32" height="32" alt="Construction expert" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ANALYSIS ROW -->
+      <div class="calc-v2__analysis-row">
+        <div class="calc-v2__card calc-v2__donut-card">
+          <h3>Cost Breakdown</h3>
+          <div class="calc-v2__donut-wrap">
+            <div class="calc-v2__donut" [style.background]="donutGradient()">
+              <div class="calc-v2__donut-hole">
+                <span class="text-secondary">Total</span>
+                <strong>{{ formatLakh(estimatedCost()) }}</strong>
+              </div>
+            </div>
+            <ul class="calc-v2__legend">
+              @for (row of breakdownRows(); track row.label) {
+                <li>
+                  <span class="calc-v2__legend-dot" [style.background]="row.color"></span>
+                  <span class="calc-v2__legend-label">{{ row.label }}</span>
+                  <span class="calc-v2__legend-value">{{ formatLakh(row.amount) }} ({{ row.percent }}%)</span>
+                </li>
+              }
+            </ul>
+          </div>
+          <a routerLink="/cost-calculator" class="calc-v2__view-full-link">View Full Breakdown</a>
+        </div>
+
+        <div class="calc-v2__card calc-v2__compare-card">
+          <h3>Compare Options</h3>
+          <div class="calc-v2__compare-grid">
+            @for (tier of tiers; track tier.tier) {
+              <div class="calc-v2__compare-option" [class.is-selected]="selectedTier() === tier.tier">
+                @if (tier.recommended) {
+                  <span class="calc-v2__recommended-pill">Recommended</span>
+                }
+                <h4>{{ tier.tier }}</h4>
+                <strong>₹{{ tier.ratePerSqft.toLocaleString('en-IN') }} / sq.ft</strong>
+                <span class="text-secondary">{{ formatLakh(tier.ratePerSqft * builtUpArea()) }} (Est.)</span>
+                <ul>
+                  @for (f of tier.features; track f) {
+                    <li>✓ {{ f }}</li>
+                  }
+                </ul>
+                <button
+                  type="button"
+                  class="btn"
+                  [class.btn-primary]="selectedTier() === tier.tier"
+                  [class.btn-secondary]="selectedTier() !== tier.tier"
+                  (click)="selectTier(tier.tier)"
+                >{{ selectedTier() === tier.tier ? 'Selected' : 'Select' }}</button>
+              </div>
+            }
+          </div>
+        </div>
+
+        <div class="calc-v2__card calc-v2__trend-card">
+          <h3>Price Trend ({{ selectedCity().name }})</h3>
+          <svg viewBox="0 0 300 130" class="calc-v2__trend-chart" preserveAspectRatio="none">
+            <polyline [attr.points]="trendPoints()" fill="none" stroke="#6C4EF5" stroke-width="2.5" />
+            @for (pt of trendCoords(); track pt.x) {
+              <circle [attr.cx]="pt.x" [attr.cy]="pt.y" r="3" fill="#6C4EF5" />
+            }
+          </svg>
+          <div class="calc-v2__trend-months">
+            @for (m of priceTrendMonths; track m) {
+              <span>{{ m }}</span>
+            }
+          </div>
+          <p class="text-secondary calc-v2__trend-caption">Prices updated till June 2026</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHY THIS CALCULATOR IS BETTER -->
+  <section class="calc-v2__why container">
+    <div class="calc-v2__why-heading">
+      <h2>Why This Calculator is Better?</h2>
+    </div>
+    <div class="calc-v2__why-grid">
+      @for (item of whyBetter; track item.title) {
+        <div class="calc-v2__why-item">
+          <span class="calc-v2__why-icon">{{ item.icon }}</span>
+          <h4>{{ item.title }}</h4>
+          <p class="text-secondary">{{ item.desc }}</p>
+        </div>
+      }
+    </div>
+    <div class="calc-v2__why-cta">
+      <h4>Plan Better. Build Smarter.<br />Start Your Estimate Now!</h4>
+      <a routerLink="/contact" class="btn calc-v2__cta-btn">Get My Estimate →</a>
+    </div>
+  </section>
+
+  <!-- TRUST BADGES -->
+  <section class="calc-v2__trust-bar">
+    <div class="container calc-v2__trust-grid">
+      @for (badge of trustBadges; track badge.title) {
+        <div class="calc-v2__trust-item">
+          <span class="calc-v2__trust-icon">{{ badge.icon }}</span>
+          <div>
+            <strong>{{ badge.title }}</strong>
+            <span class="text-secondary">{{ badge.desc }}</span>
+          </div>
+        </div>
+      }
+    </div>
+  </section>
+</div>
